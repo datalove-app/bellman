@@ -6,7 +6,7 @@ homepage = "https://github.com/matter-labs/bellman"
 license = "MIT/Apache-2.0"
 name = "bellman_ce"
 repository = "https://github.com/matter-labs/bellman"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2018"
 
 [lib]
@@ -19,13 +19,13 @@ futures = "0.1"
 cfg-if = "0.1"
 
 # pairing = {package = "pairing_ce", path = "../pairing" }
-# pairing = {package = "pairing_ce", version = "0.19" }
 pairing = {package = "pairing_ce", git = "https://github.com/matter-labs/pairing.git", branch = "affine-ops"}
 byteorder = "1"
 
 futures-cpupool = {version = "0.1", optional = true}
+futures_new = {package = "futures", version = "0.3", default_features = false}
 num_cpus = "1"
-crossbeam = {version = "0.7.1", optional = true}
+crossbeam = {version = "0.7", optional = true}
 
 prefetch = {version = "0.2", optional = true}
 
@@ -44,7 +44,7 @@ blake2s_const = {version = "0.6", optional = true, path = "./src/plonk/blake2_co
 default = ["multicore", "plonk"]
 #default = ["multicore", "nightly"]
 #default = ["wasm"]
-multicore = ["futures-cpupool", "crossbeam"]
+multicore = ["futures-cpupool", "crossbeam", "futures_new/executor", "futures_new/thread-pool"]
 sonic = ["tiny-keccak", "blake2-rfc"]
 gm17 = []
 plonk = ["blake2s_simd", "lazy_static", "tiny-keccak", "blake2s_const"]

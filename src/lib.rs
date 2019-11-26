@@ -57,6 +57,9 @@ cfg_if! {
     }
 }
 
+mod worker_new;
+mod multexp_new;
+
 mod cs;
 pub use self::cs::*;
 
