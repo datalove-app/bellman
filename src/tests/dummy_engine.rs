@@ -97,7 +97,7 @@ impl RawEncodable for Fr {
     }
 
     fn from_raw_uncompressed_le_unchecked(
-            _encoded: &Self::Uncompressed, 
+            _encoded: &Self::Uncompressed,
             _infinity: bool
     ) -> Result<Self, GroupDecodingError> {
         Ok(<Self as Field>::zero())
@@ -308,7 +308,7 @@ impl Engine for DummyEngine {
     type G2Affine = Fr;
     type Fq = Fr;
     type Fqe = Fr;
-    
+
     // TODO: This should be F_645131 or something. Doesn't matter for now.
     type Fqk = Fr;
 
@@ -355,7 +355,7 @@ impl CurveProjective for Fr {
     }
 
     fn batch_normalization(_: &mut [Self]) {
-        
+
     }
 
     fn is_normalized(&self) -> bool {
@@ -486,11 +486,18 @@ impl CurveAffine for Fr {
         *self
     }
 
+    fn as_xy(&self) -> (&Self::Base, &Self::Base) {
+        (self, self)
+    }
 
     fn into_xy_unchecked(&self) -> (Self::Base, Self::Base) {
-        (<Fr as Field>::zero(), <Fr as Field>::zero())
+        (*self, *self)
     }
+
     fn from_xy_unchecked(_x: Self::Base, _y: Self::Base) -> Self {
-        <Fr as Field>::zero()
+        _x
+    }
+
+    fn from_xy_checked(_x: Self::Base, _y: Self::Base) -> Result<Self, GroupDecodingError> {
     }
 }

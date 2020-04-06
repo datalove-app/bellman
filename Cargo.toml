@@ -6,7 +6,7 @@ homepage = "https://github.com/matter-labs/bellman"
 license = "MIT/Apache-2.0"
 name = "bellman_ce"
 repository = "https://github.com/matter-labs/bellman"
-version = "0.3.2"
+version = "0.3.3"
 edition = "2018"
 
 [lib]
