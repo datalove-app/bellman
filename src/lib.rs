@@ -34,7 +34,7 @@ pub mod plonk;
 extern crate lazy_static;
 
 mod group;
-mod source;
+pub mod source;
 mod multiexp;
 
 #[cfg(test)]
