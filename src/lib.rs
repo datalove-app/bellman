@@ -34,7 +34,7 @@ pub mod plonk;
 extern crate lazy_static;
 
 mod group;
-mod source;
+pub mod source;
 mod multiexp;
 
 #[cfg(test)]
@@ -46,12 +46,12 @@ cfg_if! {
         compile_error!("Multicore feature is not yet compatible with wasm target arch");
 
         mod multicore;
-        mod worker {
+        pub mod worker {
             pub use crate::multicore::*;
         }
     } else {
         mod singlecore;
-        mod worker {
+        pub mod worker {
             pub use crate::singlecore::*;
         }
     }
@@ -63,6 +63,10 @@ pub use self::cs::*;
 use std::str::FromStr;
 use std::env;
 
-fn verbose_flag() -> bool {
-    option_env!("BELLMAN_VERBOSE").unwrap_or("0") == "1"
+cfg_if!{
+    if #[cfg(any(not(feature = "nolog"), feature = "sonic"))] {
+        fn verbose_flag() -> bool {
+            option_env!("BELLMAN_VERBOSE").unwrap_or("0") == "1"
+        }
+    }
 }
