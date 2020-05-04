@@ -55,7 +55,7 @@ macro_rules! transparent_engine_impl {
             }
 
             fn batch_normalization(_: &mut [Self]) {
-                
+
             }
 
             fn is_normalized(&self) -> bool {
@@ -186,12 +186,20 @@ macro_rules! transparent_engine_impl {
                 *self
             }
 
+            fn as_xy(&self) -> (&Self::Base, &Self::Base) {
+                unimplemented!()
+            }
+
             fn into_xy_unchecked(&self) -> (Self::Base, Self::Base) {
                 (<$fr as crate::ff::Field>::zero(), <$fr as crate::ff::Field>::zero())
             }
 
             fn from_xy_unchecked(x: Self::Base, y: Self::Base) -> Self {
                 <$fr as crate::ff::Field>::zero()
+            }
+
+            fn from_xy_checked(x: Self::Base, y: Self::Base) -> Result<Self, GroupDecodingError> {
+                Ok(<$fr as crate::ff::Field>::zero())
             }
         }
 
@@ -202,7 +210,7 @@ macro_rules! transparent_engine_impl {
             }
 
             fn from_raw_uncompressed_le_unchecked(
-                    _encoded: &Self::Uncompressed, 
+                    _encoded: &Self::Uncompressed,
                     _infinity: bool
             ) -> Result<Self, crate::pairing::GroupDecodingError> {
                 Ok(<Self as crate::ff::Field>::zero())
