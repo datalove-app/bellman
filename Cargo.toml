@@ -16,7 +16,6 @@ crate-type = ["cdylib", "lib", "staticlib"]
 rand = "0.4"
 bit-vec = "0.6"
 cfg-if = "0.1"
-lazy_static = "1.4.0"
 
 #pairing = {package = "pairing_ce", path = "../pairing" }
 pairing = {package = "pairing_ce", version = "0.21" }
@@ -42,6 +41,7 @@ blake2s_const = {version = "0.6", optional = true, path = "./src/plonk/blake2_co
 # default = []
 default = ["multicore"]
 #default = ["wasm"]
+halo = []
 multicore = ["crossbeam", "futures/thread-pool"]
 sonic = ["tiny-keccak", "blake2-rfc"]
 gm17 = []
@@ -49,4 +49,3 @@ plonk = ["blake2s_simd", "lazy_static", "tiny-keccak", "blake2s_const"]
 nolog = []
 wasm = ["web-sys"]
 nightly = ["prefetch"]
-derive_serde = ["pairing/derive_serde"]

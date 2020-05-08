@@ -25,13 +25,19 @@ pub mod groth16;
 #[cfg(feature = "gm17")]
 pub mod gm17;
 
+#[cfg(feature = "halo")]
+pub mod halo;
+
 #[cfg(feature = "sonic")]
 pub mod sonic;
 
-#[cfg(feature = "plonk")]
-pub mod plonk;
-#[macro_use]
-extern crate lazy_static;
+cfg_if! {
+    if #[cfg(feature = "plonk")] {
+        #[macro_use]
+        extern crate lazy_static;
+        pub mod plonk;
+    }
+}
 
 mod group;
 pub mod source;

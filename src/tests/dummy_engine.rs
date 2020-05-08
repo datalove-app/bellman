@@ -499,5 +499,6 @@ impl CurveAffine for Fr {
     }
 
     fn from_xy_checked(_x: Self::Base, _y: Self::Base) -> Result<Self, GroupDecodingError> {
+        Ok(_x)
     }
 }
